@@ -1,6 +1,7 @@
 package com.camp.bit.todolist.debug;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -65,7 +66,14 @@ public class DebugActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO 把一段文本写入某个存储区的文件中，再读出来，显示在 fileText 上
+
+                String ss="这是我写的一段话放到文件里再取出来";
+                SharedPreferences sharedPreferences=getSharedPreferences("FileText",DebugActivity.MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString("jiecaojun",ss);
+                editor.apply();
                 fileText.setText("TODO");
+                fileText.setText(sharedPreferences.getString("jiecaojun","获取失败"));
             }
         });
     }
